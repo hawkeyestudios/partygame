@@ -2,7 +2,7 @@ using ExitGames.Client.Photon;
 using Photon.Pun;
 using UnityEngine;
 
-public class Player: MonoBehaviourPunCallbacks
+public class Player : MonoBehaviourPunCallbacks
 {
     public float flagHoldTime = 0f;
     public float jumpForce = 10f;
@@ -28,35 +28,29 @@ public class Player: MonoBehaviourPunCallbacks
             return;
         }
 
-        
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(moveX, 0, moveZ) * 5f;
 
-        
         if (movement != Vector3.zero)
         {
             rb.MovePosition(rb.position + movement * Time.deltaTime);
             transform.forward = movement;
         }
 
-        
         bool isWalking = movement.magnitude > 0;
         animator.SetBool("isWalking", isWalking);
 
-        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
 
-        
         if (isHoldingFlag)
         {
             flagHoldTime += Time.deltaTime;
 
-            
             ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
             hash.Add("FlagHoldTime", flagHoldTime);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
@@ -65,10 +59,11 @@ public class Player: MonoBehaviourPunCallbacks
 
     private void Jump()
     {
-        
+        // Eðer karakter zemindeyse zýpla
         if (Mathf.Abs(rb.velocity.y) < 0.01f)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            //animator.SetTrigger("Jump"); // Eðer zýplama animasyonu varsa
         }
     }
 

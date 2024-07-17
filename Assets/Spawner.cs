@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         
-        Vector3 spawnPosition = new Vector3(15, 4, Random.Range(-15, 5));
+        Vector3 spawnPosition = new Vector3(14, -3, Random.Range(-8,0));
         PhotonNetwork.Instantiate("Player", spawnPosition, Quaternion.identity);
     }
 
