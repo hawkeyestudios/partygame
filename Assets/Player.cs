@@ -7,6 +7,7 @@ public class Player : MonoBehaviourPunCallbacks
     public float flagHoldTime = 0f;
     public float jumpForce = 10f;
     private bool isHoldingFlag = false;
+    private bool isGrounded = false;
     private Rigidbody rb;
     private Animator animator;
 
@@ -40,9 +41,9 @@ public class Player : MonoBehaviourPunCallbacks
         }
 
         bool isWalking = movement.magnitude > 0;
-        animator.SetBool("isWalking", isWalking);
+        //animator.SetBool("isWalking", isWalking);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             Jump();
         }
@@ -59,11 +60,26 @@ public class Player : MonoBehaviourPunCallbacks
 
     private void Jump()
     {
-        // Eðer karakter zemindeyse zýpla
-        if (Mathf.Abs(rb.velocity.y) < 0.01f)
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        //animator.SetTrigger("Jump"); 
+        isGrounded = false;  
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+        if (collision.gameObject.CompareTag("Ground"))
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            //animator.SetTrigger("Jump"); // Eðer zýplama animasyonu varsa
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
         }
     }
 

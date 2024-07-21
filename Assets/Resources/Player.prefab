@@ -68,7 +68,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864027722622015860}
   serializedVersion: 4
-  m_Mass: 1.5
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flagHoldTime: 0
-  jumpForce: 10
+  jumpForce: 7
 --- !u!114 &6288846504093116884
 MonoBehaviour:
   m_ObjectHideFlags: 0
